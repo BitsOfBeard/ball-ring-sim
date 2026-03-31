@@ -35,9 +35,33 @@ The current collision model is intentionally simplified. At high densities, the 
 
 ## Installation
 
-Clone the repository and install dependencies:
+Clone the repository:
 
 ```bash
-git clone &lt;your-repo-url&gt;
+git clone https://github.com/BitsOfBeard/ball-ring-sim.git
 cd ball-ring-sim
-pip install -r requirements.txt
+```
+
+Create a virtual environment:
+
+```bash
+python -m venv .venv
+```
+
+Activate it on Linux or macOS:
+
+```bash
+source .venv/bin/activate
+```
+
+Activate it on Windows PowerShell:
+
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+Install dependencies:
+
+```bash
+python -m pip install -r requirements.txt
+```
