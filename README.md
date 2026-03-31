@@ -65,3 +65,99 @@ Install dependencies:
 ```bash
 python -m pip install -r requirements.txt
 ```
+
+## Run
+
+```bash
+python main.py
+```
+
+The first run may take a little longer because Numba compiles the hot paths on startup.
+
+## Controls
+
+- `H` cycles HUD modes
+- `R` toggles rendering
+- `Esc` quits
+
+## HUD modes
+
+The simulation includes four HUD states:
+
+- Off
+- Ball count only
+- Basic measured statistics
+- Full measured statistics plus rough estimates
+
+## Configuration
+
+The simulation is currently configured by editing constants near the top of `main.py`.
+
+The most important settings are:
+
+- `WIDTH`, `HEIGHT`, `CIRCLE_RADIUS`
+- `BALL_RADIUS`
+- `BALL_RESTITUTION`
+- `WALL_RESTITUTION`
+- `GRAVITY`
+- `MIN_SPEED`
+- `MAX_SPEED`
+- `FPS`
+- `SUBSTEPS`
+- `MAX_BALLS`
+- `SPAWN_COOLDOWN`
+
+Some values are derived automatically from the ball size, such as `CELL_SIZE` and the grid dimensions used for broad-phase collision detection.
+
+### Default configuration
+
+```python
+WIDTH, HEIGHT = 800, 800
+CENTER_X, CENTER_Y = WIDTH // 2, HEIGHT // 2
+CIRCLE_RADIUS = 350
+
+BALL_RADIUS = 2.0
+BALL_RESTITUTION = 0.96
+WALL_RESTITUTION = 0.98
+GRAVITY = 400.0
+MIN_SPEED = 0.0
+MAX_SPEED = 2500.0
+
+FPS = 60
+SUBSTEPS = 4
+
+MAX_BALLS = 250000
+SPAWN_COOLDOWN = 0.0000001
+```
+
+### Tuning notes
+
+Lower `BALL_RADIUS` lets more balls fit inside the ring, but it also changes collision density and rendering cost.
+
+Increasing `SUBSTEPS` usually improves stability, but reduces performance.
+
+`FAST_POINT_RENDER` is enabled automatically for very small balls.
+
+If you want the simulation to feel less energetic, lower `BALL_RESTITUTION` and `WALL_RESTITUTION`.
+
+## Performance notes
+
+Performance depends heavily on particle radius, particle count, substep count, and whether rendering is enabled.
+
+For very small balls, rendering can become the bottleneck before the physics simulation does.
+
+If you want to isolate simulation performance, press `R` to disable rendering temporarily.
+
+## Repository contents
+
+```text
+main.py
+requirements.txt
+README.md
+LICENSE
+.gitignore
+```
+
+## License
+
+MIT License. See `LICENSE`.
